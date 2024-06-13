@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: 192.168.0.33/devops/cicd-web-project
-  newTag: "21"
+  newTag: "20"
 - name: cicd-web-project
   newName: 192.168.0.33/devops/cicd-web-project
   newTag: "7"
