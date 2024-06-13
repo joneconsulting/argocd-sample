@@ -1,23 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: welcome-svc
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: welcome-app
+  type: NodePort
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-deploy
+  name: welcome-deploy
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: hello-app
-  replicas: 1
+      app: welcome-app
   template:
     metadata:
       labels:
-        app: hello-app
+        app: welcome-app
     spec:
       containers:
-        - name: cicd-web-project
-          image: 10.250.172.246/devops/cicd-web-project:prod-v1.0
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-              protocol: TCP
+      - image: 192.168.0.33/devops/cicd-web-project:testv1.2
+        imagePullPolicy: IfNotPresent
+        name: cicd-web-project
+        ports:
+        - containerPort: 8080
+          protocol: TCP
       imagePullSecrets:
-        - name: regcred
+      - name: regcred
